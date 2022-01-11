@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar API</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Belajar API</span>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch </button>
+
+
+    </nav>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">START DATE</th>
+                    <th scope="col">END DATE</th>
+                    <th scope="col">ACTION</th>
+                </tr>
+            </thead>
+            <tbody class="list-class">
+
+
+            </tbody>
+        </table>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Formulir</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Fullstack 6">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" id="description" placeholder="Description">
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" class="form-control" id="startDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <input type="date" class="form-control" id="endDate" placeholder="Fullstack 6">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="postClass()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API = "https://service-classroom.herokuapp.com/api/class"
+
+        const getClass = async () => {
+            try {
+                const request = await axios.get(API)
+                const listClass = request.data.data
+                let listHtml = ""
+                listClass.forEach((data, i) => {
+                    listHtml += `
+                                <tr>
+                                    <th scope="row">${i + 1}</th>
+                                    <td>${data.name}</td>
+                                    <td>${data.startDate}</td>
+                                    <td>${data.endDate}</td>
+                                    <td> <button type="button" class="btn btn-danger" 
+                                        onclick="deleteClass(${data.id})"> Hapus</button> </td>
+                                </tr>
+                                `
+                });
+                $(".list-class").html(listHtml)
+                //
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+
+        const deleteClass = async (idClass) => {
+            try {
+                const request = await axios.delete(API + "/" + idClass)
+                Swal.fire({
+                    text: request.data.msg,
+                    icon: 'success',
+                })
+                getClass()
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        const postClass = async () => {
+            const payload = {
+                name: $("#name").val(),
+                description: $("#description").val(),
+                startDate: $("#startDate").val(),
+                endDate: $("#endDate").val()
+            }
+            try {
+                const request = await axios.post(API, payload)
+                alert(request.data.msg)
+                getClass()
+                $("#exampleModal").modal("hide")
+                Swal.fire({
+                    text: request.data.msg,
+                    icon: 'success',
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        getClass()
+        // running every 5 second
+        // setInterval(function () {
+        //     getClass()
+        // }, 5000);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar JS</title>
+</head>
+
+<body>
+
+    <script>
+        let say = (name) => {
+            document.writeln(`Hello ${name}<br>`);
+        }
+
+        say('John');
+
+        let sayNonBlock = (name) => document.writeln(`Hello ${name}`);
+
+        sayNonBlock('Alice<br>');
+
+        const greeting = (firstName, lastName) => `Hello ${firstName} ${lastName}`;
+
+        greeting("ghany", "ersa")
+        document.writeln(greeting("ghany", "ersa"));
+
+        const luasPersegi = (s) => s * s;
+        // function luarPersegi(s) {
+        //     return s * s;
+        // }
+        document.writeln(luasPersegi(5));
+
+        const volumeKubus = s => {
+            const luasAlas = s * s
+            const volume = luasAlas * s
+            return volume
+        }
+        document.writeln(volumeKubus(5));
+
+        // looping 1-10
+        // let counter = 1
+        // for (; counter <= 10; ) {
+        //     document.writeln("<br> Hello World " + counter);
+        //     counter++
+        // }
+        for (let counter = 1; counter <= 10; counter++) {
+            document.writeln("<br> Hello World " + counter);
+        }
+        const listName = ["mas nabil", "mas yidho", "mas gilang", "mbak siska"]
+        listName.forEach((element, index, list) => {
+            document.writeln("<br> disini " + element + " index ke " + index + " dari " + list)
+        });
+        listName.forEach((name, i, arr) => {
+            document.writeln("<br> " + i)
+        });
+        const forName = (name, index, arr) => {
+            document.writeln("<br> " + i)
+        }
+        // listName.forEach(forName)
+        const listDeveloper = [
+            { name: "mas yhido", role: "backend", task: [1, 2, 3, 4] },
+            { name: "mas fauzan", role: "frontend" },
+            { name: "mas aufa", role: "backend" }
+        ]
+
+        listDeveloper.forEach(element => {
+            console.log(element.name)
+            console.log(element.role)
+            console.log(element.task)
+        });
+
+
+        // SCOPE
+
+        let increment = 0
+        const inc = () => {
+            console.log("awal " + increment)
+            increment += 7
+            console.log("akhir " + increment)
+        }
+
+        inc()
+        inc()
+        console.log(increment)
+
+        const localVariabel = () => {
+            const name = "Ghany Abdillah Ersa"
+            let a
+            // if (asdsad) {
+            //     a = 7
+            // }
+        }
+        localVariabel()
+        // console.log(name)
+
+        const students = ["mas nabil", "mas yidho", "mas gilang", "mbak siska"]
+        const [nabil, yidho] = students
+        // const nabil = students[0]
+        console.log(students[0])
+
+        const person = {
+            name: "Ghany Abdillah Ersa",
+            address: {
+                city: "depok",
+                country: "INDONESIA"
+            }
+        }
+        // const address = person.address
+        const { name, address: { city, country }, address } = person
+        console.log(address)
+
+        listName.map
+        listName.filter
+    </script>
+</body>
+
+</html>
