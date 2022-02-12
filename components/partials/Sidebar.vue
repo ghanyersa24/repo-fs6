@@ -58,6 +58,11 @@ export default {
           icon: "fas fa-chalkboard-teacher",
           link: "/state-management",
         },
+        {
+          name: "State No API",
+          icon: "fas fa-chalkboard-teacher",
+          link: "/state-management/no-api",
+        },
       ],
     };
   },

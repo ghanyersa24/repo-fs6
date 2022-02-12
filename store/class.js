@@ -14,6 +14,7 @@ export const state = () => {
 
 export const actions = {
   SET_CLASSES({ commit }, classes) {
+    debugger;
     commit("SET_CLASSES_MUTATION", classes);
   },
   SET_CLASS({ commit }, myclass) {
@@ -23,6 +24,7 @@ export const actions = {
 
 export const mutations = {
   SET_CLASSES_MUTATION(state, classes) {
+    debugger;
     state.classes = classes;
   },
   SET_CLASS_MUTATION(state, myclass) {
