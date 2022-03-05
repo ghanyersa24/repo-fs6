@@ -1,0 +1,22 @@
+{
+  "name": "belajar-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghanyersa24/repo-fs6.git"
+  },
+  "author": "ghany",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ghanyersa24/repo-fs6/issues"
+  },
+  "homepage": "https://github.com/ghanyersa24/repo-fs6#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
