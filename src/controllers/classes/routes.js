@@ -5,8 +5,10 @@ const updateClass = require("./update.classController");
 const deleteClass = require("./delete.classController");
 const readClass = require("./read.classController");
 const readWithSession = require("./readWithSession.classController");
+const validator = require("../../helpers/validator");
+const { checkToken } = require("../../middlewares/jwt");
 
-router.post("/", createClass.service);
+router.post("/", checkToken, createClass.validation, validator, createClass.service);
 router.put("/:id", updateClass.service);
 router.delete("/:id", deleteClass.service);
 router.get("/sessions", readWithSession.service);
