@@ -20,7 +20,7 @@ const checkToken = (req, res, next) => {
         msg: err.toString(),
       });
     }
-    req.auth = decoded;
+    req.auth = decoded.user;
     next();
   });
 };
